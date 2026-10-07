@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="A simple class record manager built with HTML, CSS, and JavaScript." />
+        <title>Class Record Manager</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <main class="manager">
+            <header class="page-header">
+                <p class="eyebrow">Laboratory 2 || GROUP 09</p>
+                <h1>Class Record Manager</h1>
+            </header>
+
+            <section class="card" aria-labelledby="class-list-heading">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Hello, Teacher!</p>
+                        <h2 id="class-list-heading">Class List</h2>
+                    </div>
+                    <p class="count-badge">Students: <span id="array-length">0</span></p>
+                </div>
+                <ol id="student-list" class="student-list" aria-live="polite"></ol>
+                <p id="empty-message" class="empty" hidden>The class list is empty. Add a student below.</p>
+            </section>
+
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+
+            <div class="tools-grid">
+                <section class="card" aria-labelledby="add-heading">
+                    <h2 id="add-heading">Add a Student</h2>
+                    <p class="hint">Adds a name to the end of the list.</p>
+                    <form id="add-form" class="form">
+                        <label for="student-name">Student name</label>
+                        <div class="input-row">
+                            <input
+                                id="student-name"
+                                name="studentName"
+                                type="text"
+                                placeholder="Enter a name"
+                                autocomplete="off"
+                                required
+                            />
+                            <button type="submit">Add</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card" aria-labelledby="remove-heading">
+                    <h2 id="remove-heading">Remove a Student</h2>
+                    <p class="hint">Removes the last name from the class list.</p>
+                    <button id="remove-last-button" class="button-danger" type="button">Remove Last</button>
+                </section>
+
+                <section class="card" aria-labelledby="find-heading">
+                    <h2 id="find-heading">Find by Index</h2>
+                    <p class="hint">Look up a student by position.</p>
+                    <form id="find-form" class="form">
+                        <label for="student-index">Index (starting at 0)</label>
+                        <div class="input-row">
+                            <input
+                                id="student-index"
+                                name="studentIndex"
+                                type="number"
+                                step="1"
+                                placeholder="e.g. 0"
+                                required
+                            />
+                            <button type="submit">Find</button>
+                        </div>
+                    </form>
+                    <p id="find-result" class="result" aria-live="polite"></p>
+                </section>
+
+                <section class="card" aria-labelledby="join-heading">
+                    <h2 id="join-heading">Join Student Names</h2>
+                    <p class="hint">Combine all names into one string with a separator.</p>
+                    <label for="separator">Separator</label>
+                    <div class="input-row">
+                        <input id="separator" name="separator" type="text" value=" | " autocomplete="off" />
+                        <button id="join-button" class="button-secondary" type="button">Join Items</button>
+                    </div>
+                    <p id="join-result" class="result" aria-live="polite"></p>
+                </section>
+
+                <section class="card" aria-labelledby="string-heading">
+                    <h2 id="string-heading">Convert to String</h2>
+                    <p class="hint">Show the default comma-separated string.</p>
+                    <button id="to-string-button" class="button-secondary" type="button">Convert to String</button>
+                    <p id="to-string-result" class="result" aria-live="polite"></p>
+                </section>
+            </div>
+
+            <footer class="page-footer">
+                <p class="footer-lab">Laboratory 2 || 2IT-B</p>
+                <p class="footer-names">Flores Alxen · Mangubat Steven · Paden Andrhea</p>
+            </footer>
+        </main>
+    </body>
+</html>

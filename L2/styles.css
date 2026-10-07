@@ -1,0 +1,331 @@
+:root {
+    --paper: #f5efe3;
+    --sheet: #fffdf7;
+    --ink: #1d2a44;
+    --ink-soft: #55607a;
+    --pencil: #c8452c;
+    --pencil-dark: #a63620;
+    --highlight: #fbe38a;
+    --rule: #c9d9ea;
+    --border: 2px solid var(--ink);
+    --shadow: 4px 4px 0 var(--ink);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Karla", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+    color: var(--ink);
+    background-color: var(--paper);
+    /* subtle dotted desk texture */
+    background-image: radial-gradient(rgba(29, 42, 68, 0.12) 1px, transparent 1px);
+    background-size: 18px 18px;
+}
+
+.manager {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 1rem;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 3px double var(--ink);
+}
+
+.page-header h1 {
+    margin: 0.2rem 0 0.4rem;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin: 0;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--highlight);
+}
+
+.card {
+    background: var(--sheet);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.card h2 {
+    margin: 0 0 0.2rem;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.hint {
+    margin: 0 0 1rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+}
+
+.roster {
+    padding: 0;
+    overflow: hidden;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    border-bottom: var(--border);
+    background: var(--paper);
+}
+
+.section-heading h2 {
+    margin: 0.25rem 0 0;
+    font-size: 1.6rem;
+}
+
+.count-badge {
+    margin: 0;
+    padding: 0.35rem 0.9rem;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    color: var(--pencil);
+    border: 2px dashed var(--pencil);
+    transform: rotate(-3deg);
+    white-space: nowrap;
+}
+.count-badge span {
+    font-size: 1.3em;
+}
+
+.student-list {
+    --margin-x: 3.6rem;
+    margin: 0;
+    padding: 0.4rem 1.4rem 0.4rem 0;
+    list-style: none;
+    counter-reset: student;
+    max-height: 22rem;
+    overflow-y: auto;
+    background:
+        linear-gradient(
+            to right,
+            transparent calc(var(--margin-x) - 2px),
+            rgba(200, 69, 44, 0.7) calc(var(--margin-x) - 2px),
+            rgba(200, 69, 44, 0.7) var(--margin-x),
+            transparent var(--margin-x)
+        ),
+        var(--sheet);
+}
+
+.student-list li {
+    counter-increment: student;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.4rem 0 0.4rem 0;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.student-list li::before {
+    content: counter(student, decimal-leading-zero);
+    flex: 0 0 var(--margin-x);
+    padding-right: 0.9rem;
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+
+.empty {
+    margin: 0;
+    padding: 1.5rem 1.4rem;
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+.status {
+    min-height: 2.6rem;
+    margin: 1.25rem 0;
+    padding: 0.5rem 0.9rem;
+    font-weight: 700;
+    background: var(--highlight);
+    border: var(--border);
+}
+.status:empty {
+    visibility: hidden;
+}
+.status.error {
+    background: #ffd9d1;
+    color: var(--pencil-dark);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+}
+
+.form {
+    display: grid;
+    gap: 0.4rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.input-row {
+    display: flex;
+    gap: 0.6rem;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: var(--border);
+    border-radius: 0;
+}
+input::placeholder {
+    color: #98a1b5;
+}
+input:focus {
+    outline: none;
+    background: #fffbe6;
+    box-shadow: 3px 3px 0 var(--pencil);
+}
+
+button {
+    padding: 0.6rem 1.1rem;
+    font: inherit;
+    font-weight: 700;
+    color: #fff;
+    background: var(--ink);
+    border: var(--border);
+    box-shadow: 3px 3px 0 var(--pencil);
+    cursor: pointer;
+    transition:
+        transform 0.08s,
+        box-shadow 0.08s;
+}
+button:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--pencil);
+}
+button:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--pencil);
+}
+button:focus-visible {
+    outline: 3px solid var(--highlight);
+    outline-offset: 2px;
+}
+
+.button-secondary {
+    color: var(--ink);
+    background: var(--highlight);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+.button-secondary:hover {
+    box-shadow: 4px 4px 0 var(--ink);
+}
+.button-secondary:active {
+    box-shadow: 0 0 0 var(--ink);
+}
+
+.button-danger {
+    background: var(--pencil);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+.button-danger:hover {
+    box-shadow: 4px 4px 0 var(--ink);
+}
+.button-danger:active {
+    box-shadow: 0 0 0 var(--ink);
+}
+
+.result {
+    margin: 1rem 0 0;
+    padding: 0.55rem 0.8rem;
+    font-weight: 600;
+    background: linear-gradient(transparent 8%, var(--highlight) 8%);
+    border-left: 5px solid var(--pencil);
+    overflow-wrap: anywhere;
+}
+.result:empty {
+    display: none;
+}
+
+.page-footer {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1rem;
+    border-top: 3px double var(--ink);
+    color: var(--ink-soft);
+    text-align: center;
+}
+
+.page-footer p {
+    margin: 0.2rem 0;
+}
+
+.footer-lab {
+    color: var(--ink);
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.footer-names {
+    font-size: 0.95rem;
+}
+
+@media (max-width: 520px) {
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .input-row {
+        flex-direction: column;
+    }
+    .student-list {
+        --margin-x: 3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
