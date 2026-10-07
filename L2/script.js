@@ -53,6 +53,12 @@ function addStudent(name) {
         return;
     }
 
+    // Check if the name contains anything other than letters and spaces
+    if (!/^[a-zA-Z\s\-']+$/.test(cleaned)) {
+        setStatus("Symbols and numbers are not allowed.", true);
+        return;
+    }
+
     students.push(cleaned);
     renderList();
     setStatus(`Added "${cleaned}".`);
