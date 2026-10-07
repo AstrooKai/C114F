@@ -34,8 +34,8 @@ function renderList() {
 
 // Sets the status message and applies error styling if needed
 function setStatus(message, isError = false) {
-    statusMsg.textContent = message; // Sets the status message
-    statusMsg.classList.toggle("error", isError); // Applies error styling if needed
+    statusMsg.textContent = message;
+    statusMsg.classList.toggle("error", isError);
 }
 
 // Adds a new student to the list
@@ -113,7 +113,7 @@ function convertStudentsToString() {
 
 // Event Listeners
 
-// Attaches an event listener to the add-form
+// Event Listener: Add Student
 document.getElementById("add-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const input = document.getElementById("student-name");
@@ -122,7 +122,7 @@ document.getElementById("add-form").addEventListener("submit", (event) => {
     input.focus();
 });
 
-// Attaches an event listener to the remove-last-button
+// Event Listener: Remove Last Student
 document.getElementById("remove-last-button").addEventListener("click", removeLastStudent);
 
 // Event Listener: Find by Index
