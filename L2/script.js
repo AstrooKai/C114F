@@ -13,6 +13,10 @@ const arrLength = document.getElementById("array-length"); // Gets the array len
 const emptyMsg = document.getElementById("empty-message"); // Gets the empty message element
 const statusMsg = document.getElementById("status-message"); // Gets the status message element
 
+const findResult = document.getElementById("find-result");
+const joinResult = document.getElementById("join-result");
+const toStringResult = document.getElementById("to-string-result");
+
 // Renders the list of students to the DOM
 function renderList() {
     studentList.innerHTML = ""; // Clears the list of students
@@ -36,7 +40,6 @@ function setStatus(message, isError = false) {
 
 // Adds a new student to the list
 function addStudent(name) {
-    // Cleans the name by removing whitespace, converting to lowercase, splitting into words, filtering out empty strings, capitalizing each word, and joining them back together
     const cleaned = name
         .trim()
         .toLowerCase()
@@ -45,43 +48,102 @@ function addStudent(name) {
         .map(w => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
 
-    // Checks if the name is empty. If so, sets the status message and returns
     if (cleaned === "") {
         setStatus("Please enter a name.", true);
         return;
     }
 
-    // Adds the student to the list and re-renders the list
     students.push(cleaned);
     renderList();
     setStatus(`Added "${cleaned}".`);
 }
 
-
-
 // Removes the last student from the list
 function removeLastStudent() {
-    // Checks if the list is empty. If so, sets the status message and returns
     if (students.length === 0) {
         setStatus("The class list is empty.", true);
         return;
     }
 
-    const removed = students.pop(); // Removes the last student from the list
-    renderList(); // Re-renders the list
-    setStatus(`Removed "${removed}".`); // Sets the status message
+    const removed = students.pop();
+    renderList();
+    setStatus(`Removed "${removed}".`);
 }
+
+//  Find item by index using at()
+function findStudentByIndex(indexInput) {
+    if (indexInput === "" || indexInput === null) {
+        return "Please enter a valid index number.";
+    }
+
+    const index = Number(indexInput);
+
+    if (isNaN(index)) {
+        return "Invalid index. Please enter a number.";
+    }
+
+    if (students.length === 0) {
+        return "The class list is currently empty.";
+    }
+
+    // Check if the positive index is out of bounds
+    if (index < 0 || index >= students.length) {
+        return `Index ${index} is out of range. (Valid range: 0 to ${students.length - 1})`;
+    }
+
+    const item = students.at(index);
+    return `Student at index ${index}: "${item}"`;
+}
+
+//  Join array items using join()
+function joinStudents(separator = " , ") {
+    if (students.length === 0) {
+        return "The class list is empty.";
+    }
+    return students.join(separator);
+}
+
+// Convert array to string using toString()
+function convertStudentsToString() {
+    if (students.length === 0) {
+        return "The class list is empty.";
+    }
+    return students.toString();
+}
+
+// Event Listeners
 
 // Attaches an event listener to the add-form
 document.getElementById("add-form").addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevents the page from reloading when the form is submitted
-    const input = document.getElementById("student-name"); // Gets the student name input
-    addStudent(input.value); // Adds the student to the list
-    input.value = ""; // Clears the input
-    input.focus(); // Focuses the input
+    event.preventDefault();
+    const input = document.getElementById("student-name");
+    addStudent(input.value);
+    input.value = "";
+    input.focus();
 });
 
 // Attaches an event listener to the remove-last-button
 document.getElementById("remove-last-button").addEventListener("click", removeLastStudent);
 
-renderList(); // Renders the initial list of students on load
+// Event Listener: Find by Index
+document.getElementById("find-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const indexInput = document.getElementById("student-index").value;
+    const result = findStudentByIndex(indexInput);
+    findResult.textContent = result;
+});
+
+//  Event Listener: Join Items
+document.getElementById("join-button").addEventListener("click", () => {
+    const customSep = document.getElementById("separator").value;
+    const result = joinStudents(customSep);
+    joinResult.textContent = result;
+});
+
+//  Event Listener: Convert to String
+document.getElementById("to-string-button").addEventListener("click", () => {
+    const result = convertStudentsToString();
+    toStringResult.textContent = result;
+});
+
+renderList(); // Initial render on page load
