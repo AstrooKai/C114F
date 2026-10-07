@@ -30,6 +30,11 @@ function renderList() {
 
     arrLength.textContent = students.length; // Displays the length of the array
     emptyMsg.hidden = students.length > 0; // Hides the empty message if the array is not empty
+
+    // Clears old results so they don't show outdated data
+    findResult.textContent = "";
+    joinResult.textContent = "";
+    toStringResult.textContent = "";
 }
 
 // Sets the status message and applies error styling if needed
@@ -53,8 +58,8 @@ function addStudent(name) {
         return;
     }
 
-    // Check if the name contains anything other than letters and spaces
-    if (!/^[a-zA-Z\s\-']+$/.test(cleaned)) {
+    // Reject names with symbols/numbers, or names with no letters at all
+    if (!/^[\p{L}\s\-'.]+$/u.test(cleaned) || !/\p{L}/u.test(cleaned)) {
         setStatus("Symbols and numbers are not allowed.", true);
         return;
     }
@@ -76,7 +81,7 @@ function removeLastStudent() {
     setStatus(`Removed "${removed}".`);
 }
 
-//  Find item by index using at()
+// Find item by index using at()
 function findStudentByIndex(indexInput) {
     if (indexInput === "" || indexInput === null) {
         return "Please enter a valid index number.";
@@ -84,25 +89,25 @@ function findStudentByIndex(indexInput) {
 
     const index = Number(indexInput);
 
-    if (isNaN(index)) {
-        return "Invalid index. Please enter a number.";
+    if (isNaN(index) || !Number.isInteger(index)) {
+        return "Invalid index. Please enter a whole number.";
     }
 
     if (students.length === 0) {
         return "The class list is currently empty.";
     }
 
-    // Check if the positive index is out of bounds
-    if (index < 0 || index >= students.length) {
-        return `Index ${index} is out of range. (Valid range: 0 to ${students.length - 1})`;
+    // Check if the index is within the bounds of the array
+    if (index < -students.length || index >= students.length) {
+        return `Index ${index} is out of range. (Valid range: ${-students.length} to ${students.length - 1})`;
     }
 
     const item = students.at(index);
     return `Student at index ${index}: "${item}"`;
 }
 
-//  Join array items using join()
-function joinStudents(separator = " , ") {
+// Join array items using join()
+function joinStudents(separator = ", ") {
     if (students.length === 0) {
         return "The class list is empty.";
     }
@@ -139,14 +144,14 @@ document.getElementById("find-form").addEventListener("submit", (event) => {
     findResult.textContent = result;
 });
 
-//  Event Listener: Join Items
+// Event Listener: Join Items
 document.getElementById("join-button").addEventListener("click", () => {
     const customSep = document.getElementById("separator").value;
-    const result = joinStudents(customSep);
+    const result = joinStudents(customSep || ", ");
     joinResult.textContent = result;
 });
 
-//  Event Listener: Convert to String
+// Event Listener: Convert to String
 document.getElementById("to-string-button").addEventListener("click", () => {
     const result = convertStudentsToString();
     toStringResult.textContent = result;
