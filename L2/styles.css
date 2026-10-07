@@ -19,7 +19,7 @@
 
 body {
     margin: 0;
-    font-family: "Karla", "Segoe UI", system-ui, sans-serif;
+    font-family: "Segoe UI", system-ui, sans-serif;
     line-height: 1.5;
     color: var(--ink);
     background-color: var(--paper);
@@ -42,7 +42,7 @@ body {
 
 .page-header h1 {
     margin: 0.2rem 0 0.4rem;
-    font-family: "Fraunces", Georgia, serif;
+    font-family: Georgia, serif;
     font-weight: 800;
     font-size: clamp(2.2rem, 6vw, 3.6rem);
     line-height: 1.05;
@@ -300,14 +300,14 @@ button:focus-visible {
     margin: 0.2rem 0;
 }
 
-.footer-lab {
+.footer-names {
     color: var(--ink);
     font-family: "Fraunces", Georgia, serif;
     font-size: 1.15rem;
     font-weight: 700;
 }
 
-.footer-names {
+.footer-lab {
     font-size: 0.95rem;
 }
 
