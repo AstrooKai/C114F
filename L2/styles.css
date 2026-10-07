@@ -126,7 +126,7 @@ body {
     margin: 0;
     padding: 0.4rem 1.4rem 0.4rem 0;
     list-style: none;
-    counter-reset: student;
+    counter-reset: student -1;
     max-height: 22rem;
     overflow-y: auto;
     background:
